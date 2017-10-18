@@ -35,11 +35,11 @@ var GeneratedTestFileNames = []string{
 	"scsi-0Google_PersistentDisk_brick2",
 }
 
+// Note the inclusion only of non-scsi names and the default
+// names (starting with google-persistent) are excluded.
 var ReturnedTestFileNames = []string{
 	"google-brick2",
-	"google-persistent-disk-0",
 }
-
 
 func Test_EnumerateFail(t *testing.T) {
 	// Create a fake directory hierarchy.
