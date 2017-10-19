@@ -1,12 +1,12 @@
 package mntgen
 
 import (
-	"text/template"
 	"io"
+	"log"
+	"os"
 	"path/filepath"
 	"strings"
-	"os"
-	"log"
+	"text/template"
 )
 
 const mount_unit_template = `[Unit]
@@ -25,7 +25,7 @@ WantedBy=multi-user.target
 type Mount struct {
 	Diskname string
 	MntPoint string
-	Device string
+	Device   string
 }
 
 // I presume that the template is parseable.
@@ -35,7 +35,7 @@ var tpl = template.Must(template.New("unit").Parse(mount_unit_template))
 func Unit(writer io.Writer, disk, device string) error {
 	mnt := &Mount{
 		Diskname: disk,
-		Device: device,
+		Device:   device,
 		MntPoint: MountPoint(disk),
 	}
 
@@ -61,7 +61,7 @@ const ServicedUnitsLocation = "/etc/systemd/system"
 // ServicedName generates the name for this serviced unit from the
 // provided diskname.
 func ServicedName(location, diskname string) string {
-	return  filepath.Join(location, "mnt-disks-" + diskname + ".mount")
+	return filepath.Join(location, "mnt-disks-"+diskname+".mount")
 }
 
 // ForAllDisks writes a serviced to the appropriate location for each device path

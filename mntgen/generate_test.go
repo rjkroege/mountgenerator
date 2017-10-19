@@ -24,7 +24,7 @@ WantedBy=multi-user.target
 `
 
 func Test_ForAllDisks(t *testing.T) {
-	testdevices :=  makeTestPaths("/dev/disk", RelativeDeviceNames)
+	testdevices := makeTestPaths("/dev/disk", RelativeDeviceNames)
 
 	// Create a fake directory hierarchy.
 	tdir, err := ioutil.TempDir("", "mountgenerator_test")
@@ -35,7 +35,6 @@ func Test_ForAllDisks(t *testing.T) {
 
 	ForAllDisks(testdevices, tdir)
 
-	
 	if got, want := Diskname(testdevices[0]), "brick2"; got != want {
 		t.Fatal("Something wrong with Diskname, got", got, "want", want)
 	}

@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	disks, err := mntgen.EnumerateDisks("/dev/disk/by-id")	
+	disks, err := mntgen.EnumerateDisks("/dev/disk/by-id")
 	if err != nil {
 		// TODO(rjk): make sure that mountgenerator fails end up in the system
 		// log. Maybe they will by default.

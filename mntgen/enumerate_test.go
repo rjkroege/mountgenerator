@@ -4,29 +4,29 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"testing"
 	"reflect"
+	"testing"
 )
 
-func makeTestPaths(td string, fns []string)  []string {
+func makeTestPaths(td string, fns []string) []string {
 	abspaths := []string{}
-	for _, f := 	range fns {
+	for _, f := range fns {
 		p := filepath.Join(td, f)
 		abspaths = append(abspaths, p)
 	}
-	return abspaths	
+	return abspaths
 }
 
 // makeFiles creates a list of test files
 func makeFiles(fns []string) error {
-	for _, f := 	range fns {
+	for _, f := range fns {
 		fd, err := os.Create(f)
 		if err != nil {
 			return err
 		}
 		fd.Close()
 	}
-	return nil	
+	return nil
 }
 
 var GeneratedTestFileNames = []string{
@@ -54,7 +54,7 @@ func Test_EnumerateFail(t *testing.T) {
 	// I don't understand how Glob works. Or reflect? Nope. glob.
 	nopath := filepath.Join(tdir, "no-such-file")
 	disks, err := EnumerateDisks(nopath)
-	
+
 	if len(disks) != 0 {
 		t.Errorf("returned non-empty list for missing dir")
 	}
@@ -76,8 +76,7 @@ func Test_Enumerate(t *testing.T) {
 	if err != nil {
 		t.Errorf("should not have received error", err)
 	}
-	if got, want := disks,  makeTestPaths(tdir, ReturnedTestFileNames); !reflect.DeepEqual(got, want) {
+	if got, want := disks, makeTestPaths(tdir, ReturnedTestFileNames); !reflect.DeepEqual(got, want) {
 		t.Errorf("want %v but got: %#v", want, got)
 	}
 }
-
