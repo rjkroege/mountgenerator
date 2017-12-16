@@ -5,5 +5,6 @@ Build the tool, and then copy it to the cloud. Make sure to make the
 tool public. Maybe the entire bucket should be public.
 
 ```
-gsutil cp diskmounter/diskmounter gs://boot-tools-liqui-org
+upx mountgenerator
+gsutil cp mountgenerator gs://boot-tools-liqui-org
 ```
