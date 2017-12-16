@@ -47,13 +47,22 @@ func Unit(writer io.Writer, disk, device string) error {
 
 // MountPoint generates the name of the mountpoint
 func MountPoint(disk string) string {
+	if disk == "home" {
+		return "/home"
+	}
 	return filepath.Join("/mnt/disks", disk)
 }
 
 // Diskname generates the name of the given device path.
+// The disk named homedir or home is treated specially and mounted on
+// /home on the host system.
 func Diskname(devpath string) string {
 	bp := filepath.Base(devpath)
-	return strings.TrimPrefix(bp, "google-")
+	tbp := strings.TrimPrefix(bp, "google-")
+	if tbp == "home" || tbp == "homedir" {
+		return "home"
+	}
+	return tbp
 }
 
 const ServicedUnitsLocation = "/etc/systemd/system"
@@ -61,6 +70,9 @@ const ServicedUnitsLocation = "/etc/systemd/system"
 // ServicedName generates the name for this serviced unit from the
 // provided diskname.
 func ServicedName(location, diskname string) string {
+	if diskname == "home" {
+		return filepath.Join(location, diskname+".mount")
+	}
 	return filepath.Join(location, "mnt-disks-"+diskname+".mount")
 }
 

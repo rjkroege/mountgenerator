@@ -8,3 +8,6 @@ tool public. Maybe the entire bucket should be public.
 upx mountgenerator
 gsutil cp mountgenerator gs://boot-tools-liqui-org
 ```
+
+Don't forget to make it publically shareable after updating.
+
