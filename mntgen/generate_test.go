@@ -8,7 +8,6 @@ import (
 
 var RelativeDeviceNames = []string{
 	"google-brick2",
-	"google-homedir",
 }
 
 const CorrectUnit = `[Unit]
@@ -23,20 +22,6 @@ Options=defaults
 [Install]
 WantedBy=multi-user.target
 `
-
-const CorrectHomeUnit = `[Unit]
-    Description=Mount home
-
-[Mount]
-What=/dev/disk/google-homedir
-Where=/home
-Type=ext4
-Options=defaults
-
-[Install]
-WantedBy=multi-user.target
-`
-
 
 func Test_ForAllDisks(t *testing.T) {
 	testdevices := makeTestPaths("/dev/disk", RelativeDeviceNames)
@@ -60,19 +45,6 @@ func Test_ForAllDisks(t *testing.T) {
 	}
 
 	if got, want := string(bslice), CorrectUnit; got != want {
-		t.Fatalf("got %#v but want %#v", got, want)
-	}
-
-	if got, want := Diskname(testdevices[1]), "home"; got != want {
-		t.Fatal("Something wrong with Diskname, got", got, "want", want)
-	}
-
-	bslice, err = ioutil.ReadFile(ServicedName(tdir, Diskname(testdevices[1])))
-	if err != nil {
-		t.Fatal("couldn't open the file that I was building", err)
-	}
-
-	if got, want := string(bslice), CorrectHomeUnit; got != want {
 		t.Fatalf("got %#v but want %#v", got, want)
 	}
 }

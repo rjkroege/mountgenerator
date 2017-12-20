@@ -37,10 +37,10 @@ var GeneratedTestFileNames = []string{
 }
 
 // Note the inclusion only of non-scsi names and the default
-// names (starting with google-persistent) are excluded.
+// names (starting with google-persistent) are excluded. Homedir
+// is special and is excluded.
 var ReturnedTestFileNames = []string{
 	"google-brick2",
-	"google-homedir",
 }
 
 func Test_EnumerateFail(t *testing.T) {

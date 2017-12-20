@@ -19,7 +19,7 @@ func EnumerateDisks(path string) ([]string, error) {
 		if err != nil {
 			return []string{}, err
 		}
-		if !m {
+		if !m && filepath.Base(f) != "google-homedir" {
 			filtered = append(filtered, f)
 		}
 	}
