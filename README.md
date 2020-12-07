@@ -1,13 +1,9 @@
 This is  a tool to scan the list of named disks mounted on the system and
 then generates a `systemd` mount unit for each of the mounted disks.
 
-Build the tool, and then copy it to the cloud. Make sure to make the
-tool public. Maybe the entire bucket should be public.
+Build the tool and install somewhere convenient:
 
 ```
 upx mountgenerator
-gsutil cp mountgenerator gs://boot-tools-liqui-org
+rclone copy mountgenerator gda:boot-tools-liqui-org/linux/amd64
 ```
-
-Don't forget to make it publically shareable after updating.
-
